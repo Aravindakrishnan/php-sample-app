@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+    - echo PRE BUILD PHASE
+    - echo $dockerpass | docker login --username $dockeruser --password-stdin 
+  build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - ls
+      - cd mysql
+      - docker build -t gk-mysql-image .
+      - cd ..
+      - cd apache
+      - docker build -t gk-apache-image .
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5o7d0z2
+      - docker tag gk-mysql-image public.ecr.aws/s5o7d0z2/gokula-ecr:gk-mysql-image
+      - docker tag gk-apache-image public.ecr.aws/s5o7d0z2/gokula-ecr:gk-apache-image
+      - docker push public.ecr.aws/s5o7d0z2/gokula-ecr:gk-mysql-image
+      - docker push public.ecr.aws/s5o7d0z2/gokula-ecr:gk-apache-image
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - ls
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+
