@@ -19,11 +19,6 @@ phases:
       - docker tag aravind-apache-image public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-apache-image
       - docker push public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-mysql-image
       - docker push public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-apache-image
-  build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
-      - ls
   post_build:
     commands:
       - echo Build completed on `date`
