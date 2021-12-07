@@ -10,15 +10,15 @@ phases:
       - echo Logging in to Amazon ECR...
       - ls
       - cd mysql
-      - docker build -t gk-mysql-image .
+      - docker build -t aravind-mysql-image .
       - cd ..
       - cd apache
-      - docker build -t gk-apache-image .
+      - docker build -t aravind-apache-image .
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s5o7d0z2
-      - docker tag gk-mysql-image public.ecr.aws/s5o7d0z2/gokula-ecr:gk-mysql-image
-      - docker tag gk-apache-image public.ecr.aws/s5o7d0z2/gokula-ecr:gk-apache-image
-      - docker push public.ecr.aws/s5o7d0z2/gokula-ecr:gk-mysql-image
-      - docker push public.ecr.aws/s5o7d0z2/gokula-ecr:gk-apache-image
+      - docker tag aravind-mysql-image public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-mysql-image
+      - docker tag aravind-apache-image public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-apache-image
+      - docker push public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-mysql-image
+      - docker push public.ecr.aws/s5o7d0z2/aravind-amazon-ecr:aravind-apache-image
   build:
     commands:
       - echo Build started on `date`
